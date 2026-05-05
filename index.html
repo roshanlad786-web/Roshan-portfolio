@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roshan Lad — Creative Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#07090e;--gold:#d4a843;--gold2:#f2cc6a;--cream:#f0e8d8;--muted:#5e5648;--surf:#10151e;--surf2:#171f2b;--border:rgba(212,168,67,.12);--border-h:rgba(212,168,67,.45)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden;cursor:none}
+#cur,#ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#cur{width:10px;height:10px;background:var(--gold);transition:width .2s,height .2s}
+#ring{width:38px;height:38px;border:1px solid rgba(212,168,67,.45);transition:width .22s,height .22s,border-color .2s}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1rem 4rem;background:rgba(7,9,14,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.1em;color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--cream);text-decoration:none;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;opacity:.45;transition:opacity .2s,color .2s}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.hire-btn{font-family:'DM Sans',sans-serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.4rem;background:var(--gold);color:var(--ink);border:none;border-radius:.2rem;cursor:none;transition:background .2s}
+.hire-btn:hover{background:var(--gold2)}
+.hero{min-height:100vh;display:grid;grid-template-columns:52% 48%;position:relative;overflow:hidden}
+.hero-l{display:flex;flex-direction:column;justify-content:center;padding:9rem 3.5rem 5rem 5rem;position:relative;z-index:2}
+.hero-r{position:relative;overflow:hidden;background:var(--surf)}
+.hero-r::before{content:'';position:absolute;top:0;left:0;bottom:0;width:70px;background:var(--ink);clip-path:polygon(0 0,100% 0,0 100%);z-index:3}
+.hero-photo{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(12%) contrast(1.04)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(7,9,14,.5) 0%,transparent 45%),linear-gradient(to top,rgba(7,9,14,.55) 0%,transparent 40%);z-index:2}
+.hero-vtag{position:absolute;bottom:2.5rem;right:2.5rem;z-index:4;writing-mode:vertical-rl;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(240,232,216,.3)}
+.eyebrow{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.75rem}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(5.5rem,9.5vw,10rem);line-height:.85;letter-spacing:.02em;margin-bottom:.5rem}
+.hero-name .g{color:var(--gold)}
+.hero-role{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.95rem,1.8vw,1.3rem);color:rgba(240,232,216,.4);margin-bottom:2rem}
+.hero-bio{font-size:.93rem;color:rgba(240,232,216,.55);line-height:1.88;max-width:430px;margin-bottom:3rem}
+.hero-btns{display:flex;gap:.85rem;margin-bottom:3.5rem}
+.btn-g{background:var(--gold);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:500;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;border:none;border-radius:.2rem;cursor:none;transition:background .2s,transform .15s}
+.btn-g:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-o{background:transparent;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;border:1px solid rgba(240,232,216,.18);border-radius:.2rem;cursor:none;transition:all .2s}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-nums{display:flex;gap:3rem;padding-top:2.5rem;border-top:1px solid var(--border)}
+.nv{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--gold);line-height:1;letter-spacing:.04em}
+.nl{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.25rem}
+.ticker{background:var(--gold);overflow:hidden;white-space:nowrap;padding:.7rem 0}
+.ticker-inner{display:inline-flex;animation:tick 30s linear infinite}
+.ticker-inner span{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.14em;color:var(--ink);padding:0 2rem}
+.ticker-inner .sep{padding:0;opacity:.3;font-size:.45rem;line-height:1.5rem}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.sec{padding:7rem 5rem;max-width:1280px;margin:0 auto}
+.sh{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,5.5vw,5.5rem);letter-spacing:.04em;line-height:.9;margin-bottom:1rem}
+.ss{font-size:.9rem;color:rgba(240,232,216,.45);max-width:480px;line-height:1.82;margin-bottom:3.5rem}
+.rule{width:100%;height:1px;background:var(--border)}
+.ey{font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:flex;align-items:center;gap:.6rem}
+.ey::before{content:'';width:22px;height:1px;background:var(--gold)}
+/* VIDEO PLAYER */
+.vid-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:1.2rem;margin-bottom:1.2rem}
+.vid-main{position:relative;border-radius:.7rem;overflow:hidden;border:1px solid var(--border);background:#000;transition:border-color .3s}
+.vid-main:hover{border-color:var(--border-h)}
+.vid-main video{width:100%;display:block;max-height:440px;object-fit:cover;background:#000}
+.now-playing-tag{position:absolute;top:1.1rem;left:1.1rem;z-index:5;background:var(--gold);color:var(--ink);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;padding:.3rem .8rem;border-radius:.15rem;pointer-events:none}
+.now-playing-title{position:absolute;bottom:0;left:0;right:0;z-index:5;padding:.8rem 1rem;background:linear-gradient(to top,rgba(7,9,14,.85),transparent);font-size:.85rem;font-weight:500;pointer-events:none}
+.vid-stack{display:flex;flex-direction:column;gap:1.2rem}
+.vid-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+.vc{position:relative;border-radius:.6rem;overflow:hidden;background:var(--surf);border:1px solid var(--border);cursor:none;transition:transform .28s,border-color .28s,box-shadow .28s}
+.vc:hover,.vc.active{transform:translateY(-5px) scale(1.01);border-color:var(--border-h);box-shadow:0 20px 40px rgba(0,0,0,.6)}
+.vc.active{border-color:var(--gold)}
+.vc-thumb{position:relative;overflow:hidden}
+.vc-thumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .4s,filter .3s;filter:brightness(.78)}
+.vc:hover .vc-thumb img,.vc.active .vc-thumb img{transform:scale(1.06);filter:brightness(1)}
+.vc-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+.pb{width:52px;height:52px;border-radius:50%;background:rgba(212,168,67,.88);display:flex;align-items:center;justify-content:center;transform:scale(.75);transition:transform .2s}
+.vc:hover .pb,.vc.active .pb{transform:scale(1)}
+.tri{width:0;height:0;border-style:solid;border-width:9px 0 9px 17px;border-color:transparent transparent transparent var(--ink);margin-left:3px}
+.vc-dur{position:absolute;bottom:.55rem;right:.55rem;background:rgba(7,9,14,.82);backdrop-filter:blur(4px);font-size:.62rem;color:var(--cream);padding:.2rem .52rem;border-radius:.22rem;z-index:3}
+.vc-body{padding:.8rem 1rem 1rem}
+.vc-tag{font-size:.58rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin-bottom:.25rem}
+.vc-title{font-size:.88rem;font-weight:500;color:var(--cream);margin-bottom:.18rem}
+.vc-desc{font-size:.74rem;color:var(--muted);line-height:1.45}
+/* DESIGN */
+.filter-bar{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.fb{background:transparent;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.48rem 1.2rem;border:1px solid rgba(240,232,216,.14);border-radius:2rem;cursor:none;transition:all .2s}
+.fb.on,.fb:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.design-bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:.9rem}
+.dc{border-radius:.55rem;overflow:hidden;background:var(--surf);border:1px solid var(--border);cursor:none;transition:transform .28s,border-color .28s,box-shadow .28s;position:relative}
+.dc:hover{transform:translateY(-6px);border-color:var(--border-h);box-shadow:0 20px 42px rgba(0,0,0,.55)}
+.dc.tall{grid-row:span 2}.dc.wide{grid-column:span 2}
+.dc-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s,filter .3s;filter:brightness(.82)}
+.dc:hover .dc-img{transform:scale(1.06);filter:brightness(1.06)}
+.dc-label{position:absolute;bottom:0;left:0;right:0;padding:.65rem .85rem;background:linear-gradient(to top,rgba(7,9,14,.92) 0%,transparent 100%);z-index:2;transform:translateY(100%);transition:transform .25s}
+.dc:hover .dc-label{transform:translateY(0)}
+.dc-tag{font-size:.56rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:.15rem}
+.dc-name{font-size:.78rem;font-weight:500;color:var(--cream)}
+/* DOCS */
+.docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.doc-card{border-radius:.55rem;overflow:hidden;background:var(--surf2);border:1px solid var(--border);cursor:none;transition:transform .28s,border-color .28s,box-shadow .28s}
+.doc-card:hover{transform:translateY(-7px);border-color:var(--border-h);box-shadow:0 20px 40px rgba(0,0,0,.55)}
+.doc-prev{overflow:hidden;position:relative}
+.doc-prev img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .4s;filter:brightness(.9)}
+.doc-card:hover .doc-prev img{transform:scale(1.05);filter:brightness(1.05)}
+.doc-badge{position:absolute;top:.7rem;left:.7rem;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;padding:.28rem .7rem;border-radius:.15rem;font-weight:500}
+.doc-badge.ai{background:rgba(212,168,67,.18);color:var(--gold);border:1px solid rgba(212,168,67,.35)}
+.doc-badge.prop{background:rgba(100,160,255,.12);color:#89b4fa;border:1px solid rgba(100,160,255,.3)}
+.doc-pages{position:absolute;bottom:.7rem;right:.7rem;font-size:.58rem;color:rgba(240,232,216,.5);background:rgba(7,9,14,.7);padding:.22rem .55rem;border-radius:.2rem}
+.doc-body{padding:.85rem 1rem 1rem}
+.doc-client{font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:.28rem}
+.doc-title{font-size:.88rem;font-weight:500;color:var(--cream)}
+/* SKILLS */
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.sbar-list{display:flex;flex-direction:column;gap:1.3rem}
+.sbar-top{display:flex;justify-content:space-between;margin-bottom:.42rem}
+.sbar-name{font-size:.85rem}
+.sbar-pct{font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:var(--gold);letter-spacing:.08em}
+.sbar-bg{height:2px;background:rgba(240,232,216,.07);border-radius:2px;overflow:hidden}
+.sbar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;width:0;transition:width 1.3s cubic-bezier(.22,1,.36,1)}
+.pill-grid{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.5rem}
+.pill{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:.42rem 1rem;border:1px solid var(--border);border-radius:2rem;color:rgba(240,232,216,.55);transition:border-color .2s,color .2s}
+.pill:hover{border-color:var(--gold);color:var(--gold)}
+/* ABOUT */
+.about-strip{display:grid;grid-template-columns:auto 1fr auto;gap:4rem;align-items:center;padding:4rem 5rem;background:var(--surf);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.about-photo{width:160px;height:160px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid rgba(212,168,67,.35)}
+.about-text p{font-size:1rem;color:rgba(240,232,216,.58);line-height:1.92;max-width:600px}
+.about-details{text-align:right;white-space:nowrap}
+.about-details p{font-size:.78rem;color:var(--muted);line-height:2;letter-spacing:.04em}
+.about-details strong{color:var(--cream);font-weight:400}
+/* EXP */
+.exp-tabs-wrap{display:grid;grid-template-columns:220px 1fr;gap:4rem}
+.exp-tabs{display:flex;flex-direction:column;gap:.4rem;position:sticky;top:6rem}
+.etab{padding:.9rem 1.2rem;border-left:2px solid transparent;cursor:none;transition:all .2s;font-size:.82rem;color:var(--muted);border-radius:0 .3rem .3rem 0}
+.etab.on{border-left-color:var(--gold);color:var(--cream);background:rgba(212,168,67,.06)}
+.etab:hover{color:var(--cream)}
+.epanel{display:none}.epanel.on{display:block}
+.eperiod{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.erole{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.04em;line-height:.95;margin-bottom:.25rem}
+.eco{font-size:.83rem;color:var(--muted);margin-bottom:1.6rem}
+.elist{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.elist li{font-size:.88rem;color:rgba(240,232,216,.62);padding-left:1.3rem;position:relative;line-height:1.65}
+.elist li::before{content:'';position:absolute;left:0;top:.7rem;width:6px;height:1px;background:var(--gold)}
+.achip{display:inline-flex;align-items:center;gap:.5rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.28);border-radius:.3rem;padding:.55rem 1rem;margin-top:1.2rem;font-size:.8rem;color:var(--gold)}
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;align-items:start}
+.ccards{display:flex;flex-direction:column;gap:.7rem}
+.cc{display:flex;align-items:center;gap:1rem;padding:.95rem 1.2rem;background:var(--surf2);border:1px solid var(--border);border-radius:.5rem;transition:border-color .2s,transform .2s}
+.cc:hover{border-color:var(--border-h);transform:translateX(5px)}
+.cc-icon{font-size:1.2rem;width:32px;text-align:center;flex-shrink:0}
+.cc-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.cc-val{font-size:.88rem;color:var(--cream);margin-top:.08rem}
+footer{text-align:center;padding:2.5rem;font-size:.7rem;color:var(--muted);letter-spacing:.12em;border-top:1px solid var(--border)}
+/* PDF LIGHTBOX */
+.pdflb{display:none;position:fixed;inset:0;z-index:2000;background:rgba(4,6,10,.97);flex-direction:column;align-items:center}
+.pdflb.open{display:flex}
+.pdf-header{width:100%;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2rem;background:rgba(16,21,30,.95);border-bottom:1px solid var(--border);flex-shrink:0}
+.pdf-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;color:var(--gold)}
+.pdf-nav{display:flex;align-items:center;gap:1rem}
+.pdf-pg{font-size:.75rem;color:var(--muted);letter-spacing:.05em;min-width:80px;text-align:center}
+.pdf-btn{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.25);color:var(--gold);font-size:.82rem;padding:.4rem .9rem;border-radius:.2rem;cursor:none;transition:background .2s}
+.pdf-btn:hover{background:rgba(212,168,67,.25)}
+.pdf-btn:disabled{opacity:.25;pointer-events:none}
+.pdf-close{background:none;border:none;color:var(--cream);font-size:1.3rem;cursor:none;opacity:.55;transition:opacity .2s;margin-left:1rem}
+.pdf-close:hover{opacity:1}
+.pdf-body{flex:1;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:2rem;width:100%}
+.pdf-img-wrap{max-width:960px;width:100%}
+.pdf-img-wrap img{width:100%;border-radius:.5rem;display:block;box-shadow:0 8px 40px rgba(0,0,0,.7)}
+.pdf-thumbs{display:flex;gap:.6rem;padding:.9rem 1.5rem;background:rgba(16,21,30,.9);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;width:100%}
+.pdf-tn{width:72px;flex-shrink:0;border-radius:.3rem;overflow:hidden;border:2px solid transparent;cursor:none;opacity:.5;transition:opacity .2s,border-color .2s}
+.pdf-tn.on,.pdf-tn:hover{border-color:var(--gold);opacity:1}
+.pdf-tn img{width:100%;display:block}
+/* IMG LIGHTBOX */
+.lb{display:none;position:fixed;inset:0;z-index:1900;background:rgba(0,0,0,.95);align-items:center;justify-content:center;padding:2rem}
+.lb.open{display:flex}
+.lb-inner{position:relative;max-width:88vw;max-height:88vh}
+.lb-inner img{max-width:100%;max-height:84vh;border-radius:.5rem;display:block}
+.lb-x{position:absolute;top:-2.5rem;right:0;background:none;border:none;color:var(--cream);font-size:1.4rem;cursor:none;opacity:.55;transition:opacity .2s}
+.lb-x:hover{opacity:1}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+.rev.vis{opacity:1;transform:translateY(0)}
+@media(max-width:960px){
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  .hero{grid-template-columns:1fr;min-height:auto}.hero-l{padding:7rem 2rem 3rem}.hero-r{height:320px}
+  .sec{padding:4rem 1.5rem}
+  .vid-layout{grid-template-columns:1fr}.vid-row{grid-template-columns:repeat(2,1fr)}
+  .design-bento{grid-template-columns:repeat(2,1fr)}.dc.wide{grid-column:span 1}
+  .docs-grid{grid-template-columns:repeat(2,1fr)}
+  .skills-wrap{grid-template-columns:1fr}
+  .about-strip{grid-template-columns:1fr;gap:2rem;padding:3rem 2rem}.about-details{text-align:left}
+  .exp-tabs-wrap{grid-template-columns:1fr}.contact-wrap{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="ring"></div>
+<nav>
+  <div class="logo">ROSHAN LAD</div>
+  <ul class="nav-links">
+    <li><a href="#videos">Videos</a></li><li><a href="#design">Design</a></li>
+    <li><a href="#docs">Presentations</a></li><li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+  </ul>
+  <button class="hire-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+</nav>
+
+<section class="hero" id="about">
+  <div class="hero-l">
+    <div class="eyebrow">Mumbai, India · Available Now</div>
+    <div class="hero-name">RO<span class="g">SHAN</span><br>LAD</div>
+    <div class="hero-role">Graphic Designer &amp; Video Editor</div>
+    <p class="hero-bio">9 years transforming ideas into striking visuals — corporate films, brand identities, AI-powered presentations, and social campaigns that make people stop scrolling.</p>
+    <div class="hero-btns">
+      <button class="btn-g" onclick="document.getElementById('videos').scrollIntoView({behavior:'smooth'})">Watch My Reels</button>
+      <button class="btn-o" onclick="document.getElementById('design').scrollIntoView({behavior:'smooth'})">See Design Work</button>
+    </div>
+    <div class="hero-nums">
+      <div><div class="nv">9+</div><div class="nl">Years</div></div>
+      <div><div class="nv">7</div><div class="nl">Videos</div></div>
+      <div><div class="nv">12</div><div class="nl">Proposals</div></div>
+      <div><div class="nv">3</div><div class="nl">Companies</div></div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <img class="hero-photo" src="PLACEHOLDER_IMG_1" alt="Roshan Lad">
+    <div class="hero-overlay"></div>
+    <div class="hero-vtag">CREATIVE DIRECTOR · VISUAL STORYTELLER</div>
+  </div>
+</section>
+
+<div class="ticker"><div class="ticker-inner">
+  <span>Graphic Design</span><span class="sep">◆</span><span>Video Editing</span><span class="sep">◆</span><span>Motion Graphics</span><span class="sep">◆</span><span>Brand Identity</span><span class="sep">◆</span><span>AI Presentations</span><span class="sep">◆</span><span>Corporate Films</span><span class="sep">◆</span><span>Social Media</span><span class="sep">◆</span><span>YouTube Content</span><span class="sep">◆</span><span>Business Proposals</span><span class="sep">◆</span><span>Real Estate</span><span class="sep">◆</span>
+  <span>Graphic Design</span><span class="sep">◆</span><span>Video Editing</span><span class="sep">◆</span><span>Motion Graphics</span><span class="sep">◆</span><span>Brand Identity</span><span class="sep">◆</span><span>AI Presentations</span><span class="sep">◆</span><span>Corporate Films</span><span class="sep">◆</span><span>Social Media</span><span class="sep">◆</span><span>YouTube Content</span><span class="sep">◆</span><span>Business Proposals</span><span class="sep">◆</span><span>Real Estate</span><span class="sep">◆</span>
+</div></div>
+
+<!-- VIDEOS -->
+<div class="sec rev" id="videos">
+  <div class="ey">Motion Work</div>
+  <h2 class="sh">VIDEO<br>PROJECTS</h2>
+  <p class="ss">Corporate films, event spotlights, brand promos and motion-graphic intros — produced end-to-end. Click any card to load it in the player.</p>
+  <div class="vid-layout">
+    <div class="vid-main">
+      <div class="now-playing-tag">▶ Now Playing</div>
+      <video id="featVid" controls preload="auto">
+        <source id="featSrc" src="" type="video/mp4">
+        Your browser does not support video.
+      </video>
+      <div class="now-playing-title" id="nowTitle">RACE 2026 Promotional</div>
+    </div>
+    <div class="vid-stack"><div class="vc" onclick="swapVid('idfc')">
+      <div class="vc-thumb">
+        <img src="PLACEHOLDER_IMG_2" alt loading="lazy">
+        <div class="vc-play"><div class="pb"><div class="tri"></div></div></div>
+        <div class="vc-dur">1:41</div>
+      </div>
+      <div class="vc-body"><p class="vc-tag">Corporate Film</p><p class="vc-title">IDFC Bank — Corporate Video</p><p class="vc-desc">Brand video production &amp; editing</p></div>
+    </div><div class="vc" onclick="swapVid('3d_logo')">
+      <div class="vc-thumb">
+        <img src="PLACEHOLDER_IMG_3" alt loading="lazy">
+        <div class="vc-play"><div class="pb"><div class="tri"></div></div></div>
+        <div class="vc-dur">0:07</div>
+      </div>
+      <div class="vc-body"><p class="vc-tag">Motion Graphics</p><p class="vc-title">3D Logo Intro</p><p class="vc-desc">Brand animation &amp; identity design</p></div>
+    </div>
+    </div>
+  </div>
+  <div class="vid-row rev"><div class="vc" onclick="swapVid('race_promo')">
+      <div class="vc-thumb">
+        <img src="PLACEHOLDER_IMG_4" alt loading="lazy">
+        <div class="vc-play"><div class="pb"><div class="tri"></div></div></div>
+        <div class="vc-dur">1:04</div>
+      </div>
+      <div class="vc-body"><p class="vc-tag">Event Promo</p><p class="vc-title">RACE 2026 Promotional</p><p class="vc-desc">Event promotional reel</p></div>
+    </div><div class="vc" onclick="swapVid('jsw')">
+      <div class="vc-thumb">
+        <img src="PLACEHOLDER_IMG_5" alt loading="lazy">
+        <div class="vc-play"><div class="pb"><div class="tri"></div></div></div>
+        <div class="vc-dur">0:51</div>
+      </div>
+      <div class="vc-body"><p class="vc-tag">Event Spotlight</p><p class="vc-title">JSW Exhibitor Spotlight</p><p class="vc-desc">Corporate event highlight</p></div>
+    </div><div class="vc" onclick="swapVid('race_icis')">
+      <div class="vc-thumb">
+        <img src="PLACEHOLDER_IMG_6" alt loading="lazy">
+        <div class="vc-play"><div class="pb"><div class="tri"></div></div></div>
+        <div class="vc-dur">2:15</div>
+      </div>
+      <div class="vc-body"><p class="vc-tag">Partnership Film</p><p class="vc-title">RACE × ICIS</p><p class="vc-desc">Co-branded promo video</p></div>
+    </div><div class="vc" onclick="swapVid('exhibitors')">
+      <div class="vc-thumb">
+        <img src="PLACEHOLDER_IMG_7" alt loading="lazy">
+        <div class="vc-play"><div class="pb"><div class="tri"></div></div></div>
+        <div class="vc-dur">1:08</div>
+      </div>
+      <div class="vc-body"><p class="vc-tag">Campaign</p><p class="vc-title">Exhibitors Spotlight</p><p class="vc-desc">WhatsApp campaign promo</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<!-- DESIGN -->
+<div class="sec" id="design">
+  <div class="ey rev">Design Work</div>
+  <h2 class="sh rev">SELECTED<br>PROJECTS</h2>
+  <div class="filter-bar rev">
+    <button class="fb on" onclick="filt('all',this)">All</button>
+    <button class="fb" onclick="filt('brochure',this)">Brochures</button>
+    <button class="fb" onclick="filt('social',this)">Social Media</button>
+    <button class="fb" onclick="filt('youtube',this)">YouTube</button>
+    <button class="fb" onclick="filt('realestate',this)">Real Estate</button>
+  </div>
+  <div class="design-bento" id="dbento">
+    <div class="dc tall" data-cat="brochure" onclick="openImg(this,'Corporate Cover Page')"><img class="dc-img" src="PLACEHOLDER_IMG_8" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Brochure</p><p class="dc-name">Corporate Cover</p></div></div>
+    <div class="dc wide" data-cat="social" onclick="openImg(this,'PUA Advertising Samples')"><img class="dc-img" src="PLACEHOLDER_IMG_9" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Social Media</p><p class="dc-name">PUA Advertising Samples</p></div></div>
+    <div class="dc" data-cat="youtube" onclick="openImg(this,'Animation Thumbnail')"><img class="dc-img" src="PLACEHOLDER_IMG_10" alt loading="lazy"><div class="dc-label"><p class="dc-tag">YouTube</p><p class="dc-name">Animation Thumbnail</p></div></div>
+    <div class="dc" data-cat="social" onclick="openImg(this,'Facebook Promo Post')"><img class="dc-img" src="PLACEHOLDER_IMG_11" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Social</p><p class="dc-name">Facebook Promo</p></div></div>
+    <div class="dc" data-cat="brochure" onclick="openImg(this,'Program Cover Design')"><img class="dc-img" src="PLACEHOLDER_IMG_12" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Brochure</p><p class="dc-name">Program Cover</p></div></div>
+    <div class="dc tall" data-cat="realestate" onclick="openImg(this,'Godrej Emerald Waters')"><img class="dc-img" src="PLACEHOLDER_IMG_13" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Real Estate</p><p class="dc-name">Godrej Emerald Waters</p></div></div>
+    <div class="dc" data-cat="youtube" onclick="openImg(this,'Industrial Polymer Thumbnail')"><img class="dc-img" src="PLACEHOLDER_IMG_14" alt loading="lazy"><div class="dc-label"><p class="dc-tag">YouTube</p><p class="dc-name">Industrial Polymer</p></div></div>
+    <div class="dc" data-cat="social" onclick="openImg(this,'Corporate Training Banner')"><img class="dc-img" src="PLACEHOLDER_IMG_15" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Social</p><p class="dc-name">Corporate Training</p></div></div>
+    <div class="dc wide" data-cat="social" onclick="openImg(this,'RACE Event Banner')"><img class="dc-img" src="PLACEHOLDER_IMG_16" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Social</p><p class="dc-name">RACE Event Banner</p></div></div>
+    <div class="dc" data-cat="brochure" onclick="openImg(this,'CREST Training Cover')"><img class="dc-img" src="PLACEHOLDER_IMG_17" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Brochure</p><p class="dc-name">CREST Cover</p></div></div>
+    <div class="dc" data-cat="youtube" onclick="openImg(this,'Intro Thumbnail')"><img class="dc-img" src="PLACEHOLDER_IMG_18" alt loading="lazy"><div class="dc-label"><p class="dc-tag">YouTube</p><p class="dc-name">Intro Thumbnail</p></div></div>
+    <div class="dc" data-cat="social" onclick="openImg(this,'Myth vs Fact Post')"><img class="dc-img" src="PLACEHOLDER_IMG_19" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Social</p><p class="dc-name">Myth vs Fact</p></div></div>
+    <div class="dc" data-cat="social" onclick="openImg(this,'Static Social Post')"><img class="dc-img" src="PLACEHOLDER_IMG_20" alt loading="lazy"><div class="dc-label"><p class="dc-tag">Social</p><p class="dc-name">Static Post</p></div></div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<!-- PRESENTATIONS -->
+<div class="sec rev" id="docs">
+  <div class="ey">AI &amp; Strategy</div>
+  <h2 class="sh">PRESENTATIONS<br>&amp; PROPOSALS</h2>
+  <p class="ss">Click any document to flip through all pages in the built-in viewer.</p>
+  <p style="font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">AI-Generated Presentations</p>
+  <div class="docs-grid" style="margin-bottom:2.5rem"><div class="doc-card" onclick="openPdf('ai_pua',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_21" alt loading="lazy">
+        <div class="doc-badge ai">AI Generated</div>
+        <div class="doc-pages">10 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">PUA</p><p class="doc-title">PUA Product Presentation</p></div>
+    </div>
+<div class="doc-card" onclick="openPdf('ai_polymer',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_22" alt loading="lazy">
+        <div class="doc-badge ai">AI Generated</div>
+        <div class="doc-pages">10 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">Polymerupdate</p><p class="doc-title">Polymerupdate Presentation</p></div>
+    </div>
+<div class="doc-card" onclick="openPdf('ai_race',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_23" alt loading="lazy">
+        <div class="doc-badge ai">AI Generated</div>
+        <div class="doc-pages">10 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">RACE 2026</p><p class="doc-title">RACE Product Presentation</p></div>
+    </div></div>
+  <p style="font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#89b4fa;margin-bottom:1rem">Business Proposals</p>
+  <div class="docs-grid"><div class="doc-card" onclick="openPdf('prop_itc',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_24" alt loading="lazy">
+        <div class="doc-badge prop">Proposal</div>
+        <div class="doc-pages">10 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">ITC Hotels</p><p class="doc-title">ITC Hotels × RACE 2026</p></div>
+    </div>
+<div class="doc-card" onclick="openPdf('prop_marico',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_25" alt loading="lazy">
+        <div class="doc-badge prop">Proposal</div>
+        <div class="doc-pages">20 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">Marico Foundation</p><p class="doc-title">Marico Innovation × RACE</p></div>
+    </div>
+<div class="doc-card" onclick="openPdf('prop_bisleri',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_26" alt loading="lazy">
+        <div class="doc-badge prop">Proposal</div>
+        <div class="doc-pages">11 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">Bisleri</p><p class="doc-title">RACE × Bisleri Proposal</p></div>
+    </div>
+<div class="doc-card" onclick="openPdf('prop_petrochem',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_27" alt loading="lazy">
+        <div class="doc-badge prop">Proposal</div>
+        <div class="doc-pages">13 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">S&P Global</p><p class="doc-title">Petrochemical Training Initiative</p></div>
+    </div>
+<div class="doc-card" onclick="openPdf('prop_triconenergy',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_28" alt loading="lazy">
+        <div class="doc-badge prop">Proposal</div>
+        <div class="doc-pages">12 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">Triconenergy</p><p class="doc-title">Triconenergy × RACE 2026</p></div>
+    </div>
+<div class="doc-card" onclick="openPdf('prop_apcci',0)">
+      <div class="doc-prev"><img src="PLACEHOLDER_IMG_29" alt loading="lazy">
+        <div class="doc-badge prop">Proposal</div>
+        <div class="doc-pages">12 pages</div>
+      </div>
+      <div class="doc-body"><p class="doc-client">APCCI</p><p class="doc-title">APCCI Partnership Proposal</p></div>
+    </div></div>
+</div>
+
+<div class="rule"></div>
+
+<!-- SKILLS -->
+<div class="sec rev" id="skills">
+  <div class="ey">Expertise</div>
+  <h2 class="sh">SKILLS &amp;<br>TOOLS</h2>
+  <div class="skills-wrap">
+    <div class="sbar-list" id="sbars">
+      <div class="sbar"><div class="sbar-top"><span class="sbar-name">Adobe Photoshop</span><span class="sbar-pct">95%</span></div><div class="sbar-bg"><div class="sbar-fill" data-w="95"></div></div></div>
+      <div class="sbar"><div class="sbar-top"><span class="sbar-name">Adobe Illustrator</span><span class="sbar-pct">90%</span></div><div class="sbar-bg"><div class="sbar-fill" data-w="90"></div></div></div>
+      <div class="sbar"><div class="sbar-top"><span class="sbar-name">Premiere Pro</span><span class="sbar-pct">92%</span></div><div class="sbar-bg"><div class="sbar-fill" data-w="92"></div></div></div>
+      <div class="sbar"><div class="sbar-top"><span class="sbar-name">After Effects</span><span class="sbar-pct">85%</span></div><div class="sbar-bg"><div class="sbar-fill" data-w="85"></div></div></div>
+      <div class="sbar"><div class="sbar-top"><span class="sbar-name">Canva</span><span class="sbar-pct">98%</span></div><div class="sbar-bg"><div class="sbar-fill" data-w="98"></div></div></div>
+      <div class="sbar"><div class="sbar-top"><span class="sbar-name">AI Generation Tools</span><span class="sbar-pct">88%</span></div><div class="sbar-bg"><div class="sbar-fill" data-w="88"></div></div></div>
+      <div class="sbar"><div class="sbar-top"><span class="sbar-name">CorelDRAW</span><span class="sbar-pct">80%</span></div><div class="sbar-bg"><div class="sbar-fill" data-w="80"></div></div></div>
+    </div>
+    <div>
+      <p style="font-size:.88rem;color:rgba(240,232,216,.48);line-height:1.9;margin-bottom:2rem">Beyond tools — storytelling, strategy and the ability to turn complex ideas into visuals that move audiences and win business.</p>
+      <div class="pill-grid">
+        <span class="pill">Social Media Mgmt</span><span class="pill">YouTube Strategy</span>
+        <span class="pill">AI Voice &amp; Dubbing</span><span class="pill">Subtitling &amp; Captions</span>
+        <span class="pill">Brand Identity</span><span class="pill">Print Production</span>
+        <span class="pill">Creative Direction</span><span class="pill">Team Supervision</span>
+        <span class="pill">Video Shoots</span><span class="pill">Business Proposals</span>
+        <span class="pill">English · Hindi · Marathi</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div class="about-strip">
+  <img class="about-photo" src="PLACEHOLDER_IMG_30" alt="Roshan Lad">
+  <div class="about-text"><p>A passionate visual storyteller based in Mumbai with 9 years helping brands communicate with clarity and creativity. From corporate identity systems to full video campaigns — every project gets a tailored approach where design serves strategy.</p></div>
+  <div class="about-details">
+    <p><strong>Arena Animation AAIP</strong><br>2012 – 2015</p><br>
+    <p><strong>Employee of the Month</strong><br>Polymerupdate, 2022</p><br>
+    <p><strong>Languages</strong><br>English · Hindi · Marathi</p>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="sec" id="experience">
+  <div class="ey rev">Career</div>
+  <h2 class="sh rev">WORK<br>EXPERIENCE</h2>
+  <div class="exp-tabs-wrap rev">
+    <div class="exp-tabs">
+      <div class="etab on" onclick="showE(0,this)">Polymerupdate<br><small style="font-size:.62rem;opacity:.4">2021 – Present</small></div>
+      <div class="etab" onclick="showE(1,this)">Phoenix Hospitality<br><small style="font-size:.62rem;opacity:.4">2018 – 2021</small></div>
+      <div class="etab" onclick="showE(2,this)">Freelance<br><small style="font-size:.62rem;opacity:.4">2016 – 2018</small></div>
+    </div>
+    <div>
+      <div class="epanel on">
+        <p class="eperiod">2021 — Present</p><h3 class="erole">Sr. Graphic Designer<br>&amp; Video Editor</h3><p class="eco">Polymerupdate · Lower Parel, Mumbai</p>
+        <ul class="elist">
+          <li>Coordinating with educators to translate academic content into visual materials</li>
+          <li>Designing brochures, academic books, study guides &amp; marketing collateral</li>
+          <li>Editing educational and promotional videos for YouTube and social platforms</li>
+          <li>Generating AI visuals and AI-powered presentations for branding</li>
+          <li>Voice translation &amp; dubbing using AI tools for multilingual content</li>
+          <li>Creating subtitles, captions and managing social media scheduling</li>
+          <li>Supervising creative team — timelines, task distribution, quality control</li>
+        </ul>
+        <div class="achip">🏅 Employee of the Month — 2022</div>
+      </div>
+      <div class="epanel">
+        <p class="eperiod">2018 — 2021</p><h3 class="erole">Graphic Designer<br>&amp; Marketing</h3><p class="eco">Phoenix Hospitality &amp; Solutions · Ghatkopar</p>
+        <ul class="elist">
+          <li>Designed custom carpets and wallpapers for hospitality interiors</li>
+          <li>Collaborated with architects to align design with project requirements</li>
+          <li>Created brochures, digital assets &amp; marketing materials</li>
+          <li>Supported client presentations with visual concepts and mockups</li>
+          <li>Managed vendor communication for print &amp; production processes</li>
+        </ul>
+      </div>
+      <div class="epanel">
+        <p class="eperiod">2016 — 2018</p><h3 class="erole">Freelance<br>Graphic Designer</h3><p class="eco">Independent · Mumbai</p>
+        <ul class="elist">
+          <li>Delivered bespoke design solutions for diverse industries</li>
+          <li>Managed full creative lifecycle from brief to final delivery</li>
+          <li>Built a varied portfolio across print, digital and branding</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div class="sec rev" id="contact">
+  <div class="ey">Get In Touch</div>
+  <h2 class="sh">LET'S<br>CREATE</h2>
+  <div class="contact-wrap">
+    <div>
+      <p style="font-size:1rem;color:rgba(240,232,216,.55);line-height:1.95;margin-bottom:2.5rem;max-width:460px">Open to full-time roles, freelance projects, and long-term creative partnerships — brand films, social campaigns, AI-powered content or business proposals.</p>
+      <div class="ccards">
+        <div class="cc"><span class="cc-icon">📞</span><div><div class="cc-lbl">Phone</div><div class="cc-val">+91 9372264522</div></div></div>
+        <div class="cc"><span class="cc-icon">✉️</span><div><div class="cc-lbl">Email</div><div class="cc-val">roshan.lad786@gmail.com</div></div></div>
+        <div class="cc"><span class="cc-icon">📍</span><div><div class="cc-lbl">Location</div><div class="cc-val">Vikhroli, Mumbai, India</div></div></div>
+      </div>
+    </div>
+    <div><img src="PLACEHOLDER_IMG_31" alt="Roshan Lad" style="width:100%;border-radius:.6rem;object-fit:cover;object-position:center top;max-height:340px;border:1px solid var(--border)"></div>
+  </div>
+</div>
+
+<footer>© 2026 &nbsp;ROSHAN LAD &nbsp;·&nbsp; GRAPHIC DESIGNER &amp; VIDEO EDITOR &nbsp;·&nbsp; MUMBAI, INDIA</footer>
+
+<!-- PDF LIGHTBOX -->
+<div class="pdflb" id="pdflb">
+  <div class="pdf-header">
+    <div class="pdf-title" id="pdfTitle">Document</div>
+    <div class="pdf-nav">
+      <button class="pdf-btn" id="pdfPrev" onclick="pdfGo(-1)">← Prev</button>
+      <div class="pdf-pg" id="pdfPg">1 / 1</div>
+      <button class="pdf-btn" id="pdfNext" onclick="pdfGo(1)">Next →</button>
+      <button class="pdf-close" onclick="closePdf()">✕</button>
+    </div>
+  </div>
+  <div class="pdf-body"><div class="pdf-img-wrap"><img id="pdfImg" src="" alt=""></div></div>
+  <div class="pdf-thumbs" id="pdfThumbs"></div>
+</div>
+
+<!-- IMG LIGHTBOX -->
+<div class="lb" id="lb" onclick="if(event.target===this)closeLb()">
+  <div class="lb-inner"><button class="lb-x" onclick="closeLb()">✕</button><img id="lbImg" src="" alt=""></div>
+</div>
+
+<script>
+// ── VIDEO DATA (fully embedded) ──
+const VIDS = {"3d_logo":"PLACEHOLDER_VID_1_mp4","exhibitors":"PLACEHOLDER_VID_2_mp4","race_promo":"PLACEHOLDER_VID_3_mp4","jsw":"PLACEHOLDER_VID_4_mp4","idfc":"PLACEHOLDER_VID_5_mp4","race_icis":"PLACEHOLDER_VID_6_mp4","race_indusind":"PLACEHOLDER_VID_7_mp4"};
+const VTITLES = {
+  race_promo:"RACE 2026 Promotional", idfc:"IDFC Bank — Corporate Video",
+  "3d_logo":"3D Logo Intro", jsw:"JSW Exhibitor Spotlight",
+  race_icis:"RACE × ICIS Partnership", exhibitors:"Exhibitors Spotlight",
+  race_indusind:"RACE × IndusInd Bank"
+};
+
+// ── PDF DATA ──
+const PDF_DATA = {
+  "prop_itc": { title: "ITC Hotels × RACE 2026", pages: ["PLACEHOLDER_IMG_32","PLACEHOLDER_IMG_33","PLACEHOLDER_IMG_34","PLACEHOLDER_IMG_35","PLACEHOLDER_IMG_36","PLACEHOLDER_IMG_37","PLACEHOLDER_IMG_38","PLACEHOLDER_IMG_39","PLACEHOLDER_IMG_40","PLACEHOLDER_IMG_41"] },
+  "prop_marico": { title: "Marico Innovation × RACE", pages: ["PLACEHOLDER_IMG_42","PLACEHOLDER_IMG_43","PLACEHOLDER_IMG_44","PLACEHOLDER_IMG_45","PLACEHOLDER_IMG_46","PLACEHOLDER_IMG_47","PLACEHOLDER_IMG_48","PLACEHOLDER_IMG_49","PLACEHOLDER_IMG_50","PLACEHOLDER_IMG_51","PLACEHOLDER_IMG_52","PLACEHOLDER_IMG_53","PLACEHOLDER_IMG_54","PLACEHOLDER_IMG_55","PLACEHOLDER_IMG_56","PLACEHOLDER_IMG_57","PLACEHOLDER_IMG_58","PLACEHOLDER_IMG_59","PLACEHOLDER_IMG_60","PLACEHOLDER_IMG_61"] },
+  "prop_bisleri": { title: "RACE × Bisleri Proposal", pages: ["PLACEHOLDER_IMG_62","PLACEHOLDER_IMG_63","PLACEHOLDER_IMG_64","PLACEHOLDER_IMG_65","PLACEHOLDER_IMG_66","PLACEHOLDER_IMG_67","PLACEHOLDER_IMG_68","PLACEHOLDER_IMG_69","PLACEHOLDER_IMG_70","PLACEHOLDER_IMG_71","PLACEHOLDER_IMG_72"] },
+  "prop_petrochem": { title: "Petrochemical Training Initiative", pages: ["PLACEHOLDER_IMG_73","PLACEHOLDER_IMG_74","PLACEHOLDER_IMG_75","PLACEHOLDER_IMG_76","PLACEHOLDER_IMG_77","PLACEHOLDER_IMG_78","PLACEHOLDER_IMG_79","PLACEHOLDER_IMG_80","PLACEHOLDER_IMG_81","PLACEHOLDER_IMG_82","PLACEHOLDER_IMG_83","PLACEHOLDER_IMG_84","PLACEHOLDER_IMG_85"] },
+  "prop_triconenergy": { title: "Triconenergy × RACE 2026", pages: ["PLACEHOLDER_IMG_86","PLACEHOLDER_IMG_87","PLACEHOLDER_IMG_88","PLACEHOLDER_IMG_89","PLACEHOLDER_IMG_90","PLACEHOLDER_IMG_91","PLACEHOLDER_IMG_92","PLACEHOLDER_IMG_93","PLACEHOLDER_IMG_94","PLACEHOLDER_IMG_95","PLACEHOLDER_IMG_96","PLACEHOLDER_IMG_97"] },
+  "prop_apcci": { title: "APCCI Partnership Proposal", pages: ["PLACEHOLDER_IMG_98","PLACEHOLDER_IMG_99","PLACEHOLDER_IMG_100","PLACEHOLDER_IMG_101","PLACEHOLDER_IMG_102","PLACEHOLDER_IMG_103","PLACEHOLDER_IMG_104","PLACEHOLDER_IMG_105","PLACEHOLDER_IMG_106","PLACEHOLDER_IMG_107","PLACEHOLDER_IMG_108","PLACEHOLDER_IMG_109"] },
+  "ai_pua": { title: "PUA Product Presentation", pages: ["PLACEHOLDER_IMG_110","PLACEHOLDER_IMG_111","PLACEHOLDER_IMG_112","PLACEHOLDER_IMG_113","PLACEHOLDER_IMG_114","PLACEHOLDER_IMG_115","PLACEHOLDER_IMG_116","PLACEHOLDER_IMG_117","PLACEHOLDER_IMG_118","PLACEHOLDER_IMG_119"] },
+  "ai_polymer": { title: "Polymerupdate Presentation", pages: ["PLACEHOLDER_IMG_120","PLACEHOLDER_IMG_121","PLACEHOLDER_IMG_122","PLACEHOLDER_IMG_123","PLACEHOLDER_IMG_124","PLACEHOLDER_IMG_125","PLACEHOLDER_IMG_126","PLACEHOLDER_IMG_127","PLACEHOLDER_IMG_128","PLACEHOLDER_IMG_129"] },
+  "ai_race": { title: "RACE Product Presentation", pages: ["PLACEHOLDER_IMG_130","PLACEHOLDER_IMG_131","PLACEHOLDER_IMG_132","PLACEHOLDER_IMG_133","PLACEHOLDER_IMG_134","PLACEHOLDER_IMG_135","PLACEHOLDER_IMG_136","PLACEHOLDER_IMG_137","PLACEHOLDER_IMG_138","PLACEHOLDER_IMG_139"] },
+};
+
+// ── Cursor ──
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function animR(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animR)})();
+document.querySelectorAll('button,a,.dc,.vc,.doc-card,.cc,.etab').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='54px';ring.style.height='54px';ring.style.borderColor='rgba(212,168,67,.8)'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='38px';ring.style.height='38px';ring.style.borderColor='rgba(212,168,67,.45)'});
+});
+
+// ── Scroll reveal ──
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')}),{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+
+// ── Skill bars ──
+const sobs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.querySelectorAll('.sbar-fill').forEach(b=>b.style.width=b.dataset.w+'%')}),{threshold:.3});
+const sb=document.getElementById('sbars');if(sb)sobs.observe(sb);
+
+// ── VIDEO: load race_promo by default on page load ──
+window.addEventListener('DOMContentLoaded',()=>{
+  swapVid('race_promo');
+});
+let activeVc = null;
+function swapVid(key){
+  const v=document.getElementById('featVid');
+  const s=document.getElementById('featSrc');
+  v.pause();
+  s.src = VIDS[key];
+  v.load();
+  v.play().catch(()=>{});
+  document.getElementById('nowTitle').textContent = VTITLES[key]||key;
+  // highlight active card
+  document.querySelectorAll('.vc').forEach(c=>c.classList.remove('active'));
+  const clicked = [...document.querySelectorAll('.vc')].find(c=>c.getAttribute('onclick')&&c.getAttribute('onclick').includes(`'${key}'`));
+  if(clicked) clicked.classList.add('active');
+}
+
+// ── Design filter ──
+function filt(cat,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.dc').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none'});
+}
+
+// ── Experience tabs ──
+function showE(i,btn){
+  document.querySelectorAll('.etab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.epanel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.epanel')[i].classList.add('on');
+}
+
+// ── PDF Viewer ──
+let curPdf=null,curPage=0;
+function openPdf(key,startPage){
+  curPdf=key;curPage=startPage||0;
+  const data=PDF_DATA[key];
+  document.getElementById('pdfTitle').textContent=data.title;
+  const wrap=document.getElementById('pdfThumbs');
+  wrap.innerHTML='';
+  data.pages.forEach((src,i)=>{
+    const d=document.createElement('div');d.className='pdf-tn'+(i===0?' on':'');
+    d.onclick=()=>showPage(i);
+    const img=document.createElement('img');img.src=src;img.loading='lazy';
+    d.appendChild(img);wrap.appendChild(d);
+  });
+  showPage(curPage);
+  document.getElementById('pdflb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function showPage(i){
+  const data=PDF_DATA[curPdf];
+  curPage=Math.max(0,Math.min(i,data.pages.length-1));
+  document.getElementById('pdfImg').src=data.pages[curPage];
+  document.getElementById('pdfPg').textContent=(curPage+1)+' / '+data.pages.length;
+  document.getElementById('pdfPrev').disabled=curPage===0;
+  document.getElementById('pdfNext').disabled=curPage===data.pages.length-1;
+  document.querySelectorAll('.pdf-tn').forEach((t,j)=>t.classList.toggle('on',j===curPage));
+  const tn=document.getElementById('pdfThumbs').children[curPage];
+  if(tn)tn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  document.querySelector('.pdf-body').scrollTop=0;
+}
+function pdfGo(dir){showPage(curPage+dir)}
+function closePdf(){
+  document.getElementById('pdflb').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ── Image lightbox ──
+function openImg(card,title){
+  document.getElementById('lbImg').src=card.querySelector('img').src;
+  document.getElementById('lb').classList.add('open');
+}
+function closeLb(){document.getElementById('lb').classList.remove('open')}
+
+// ── Keyboard ──
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('pdflb').classList.contains('open')){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')pdfGo(1);
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp')pdfGo(-1);
+    if(e.key==='Escape')closePdf();
+  } else if(document.getElementById('lb').classList.contains('open')){
+    if(e.key==='Escape')closeLb();
+  }
+});
+</script>
+</body>
+</html>
